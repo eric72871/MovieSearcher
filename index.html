@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Movies SPA</title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+</head>
+
+
+<body>
+    <form data-bind="submit: getMovies">
+        <div class="container">
+
+            <div class="page-header">
+                <h1>Movie Searcher</h1>
+            </div>
+
+            <div class="row">
+                <div class="span8">
+                    <div>
+                        <input id="term" data-bind="value : searchTerm" />
+                        <input type="submit" text="Search" />
+                    </div>
+                </div>
+                <br /><br />
+                <div class="span8">
+                    <div>
+                        <table class="table table-bordered table-condensed" data-bind="visible: movies().length > 0">
+                            <thead>
+                                <tr>
+                                    <th>Thumbnail</th>
+                                    <th>Title</th>
+                                    <th>Link</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: movies">
+                                <tr>
+                                    <td><span data-bind="visible: Thumbnail != 'N/A'"><img data-bind="attr : {src : Thumbnail}" /></span></td>
+                                    <td><span data-bind="text: Title"></span></td>
+                                    <td><a data-bind="attr : {href : Link}, text: Link" target="_blank"></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p data-bind="visible: error, text: error" class="text-error"></p>
+                    <p class="text-info" data-bind="visible: !error() && movies().length == 0">No records found.</p>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="Scripts/jquery-2.0.3.js"></script>
+    <script src="Scripts/knockout-2.3.0.debug.js"></script>
+    <script src="Scripts/app.service.js"></script>
+    <script src="Scripts/app.js"></script>
+</body>
+</html>
